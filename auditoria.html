@@ -1,0 +1,87 @@
+{{> cabecera}}
+
+<section class="tarjeta">
+  <div class="tarjeta-header">
+    <h2>Auditoria de movimientos</h2>
+  </div>
+
+  <form method="get" action="{{RUTA_AUDITORIA}}" class="filtros">
+    <label for="cuenta">Cuenta</label>
+    <select id="cuenta" name="cuenta">
+      <option value="">Todas</option>
+      {{#CUENTAS}}
+      <option value="{{ID}}"{{#SELECCIONADO}} selected{{/SELECCIONADO}}>{{NUMERO}}</option>
+      {{/CUENTAS}}
+    </select>
+
+    <label for="tipo">Tipo</label>
+    <select id="tipo" name="tipo">
+      <option value=""{{#SIN_TIPO}} selected{{/SIN_TIPO}}>Todos</option>
+      <option value="retiro"{{#TIPO_RET}} selected{{/TIPO_RET}}>Retiros</option>
+      <option value="deposito"{{#TIPO_DEP}} selected{{/TIPO_DEP}}>Depositos</option>
+    </select>
+
+    <button type="submit" class="btn btn-primario">Filtrar</button>
+    <a href="{{RUTA_AUDITORIA}}" class="btn btn-outline">Limpiar</a>
+  </form>
+
+  <div class="mini-rejilla">
+    <div class="mini"><span class="etiqueta">Total retirado</span><strong class="negativo">{{TOTAL_RETIRADO}}</strong></div>
+    <div class="mini"><span class="etiqueta">Total depositado</span><strong class="positivo">{{TOTAL_DEPOSITADO}}</strong></div>
+    <div class="mini"><span class="etiqueta">Movimientos</span><strong>{{TOTAL_MOVIMIENTOS}}</strong></div>
+  </div>
+
+
+  <p class="vacio">No hay movimientos que coincidan con el filtro.</p>
+
+  <table class="tabla">
+    <thead>
+      <tr><th>Tipo</th><th>Usuario</th><th>Cuenta</th><th>Descripcion</th><th>Cajero</th><th>Monto</th><th>Saldo</th><th>Fecha</th></tr>
+    </thead>
+    <tbody>
+  
+      <tr>
+        <td><span class="etiqueta-tag tag-{{TIPO}}">{{TEXTO}}</span></td>
+        <td class="mono">{{USUARIO}}</td>
+        <td class="mono">{{CUENTA}}</td>
+        <td>{{DESCRIPCION}}</td>
+        <td class="mono">{{CAJERO}}</td>
+        <td class="mono {{CLASE_MONTO}}">{{MONTO}}</td>
+        <td class="mono">{{SALDO}}</td>
+        <td class="mono">{{FECHA}}</td>
+      </tr>
+      {{/FILAS}}
+    </tbody>
+  </table>
+
+
+</section>
+
+<section class="tarjeta">
+  <div class="tarjeta-header">
+    <h2>Consultas al asistente</h2>
+    <a href="{{RUTA_CHAT}}">Abrir asistente</a>
+  </div>
+
+
+  <table class="tabla">
+    <thead>
+      <tr><th>Usuario</th><th>Pregunta</th><th>Categoria</th><th>Resultado</th><th>Fecha</th></tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td class="mono">{{USUARIO}}</td>
+        <td>{{PREGUNTA}}</td>
+        <td class="mono">{{CATEGORIA}}</td>
+        <td><span class="etiqueta-tag {{CLASE}}">{{ESTADO}}</span></td>
+        <td class="mono">{{FECHA}}</td>
+      </tr>
+      {{/CONSULTAS}}
+    </tbody>
+  </table>
+
+  <p class="vacio">Todavia nadie ha usado el asistente.</p>
+  
+</section>
+

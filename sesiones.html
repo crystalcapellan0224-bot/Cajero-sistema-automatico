@@ -1,0 +1,37 @@
+{{> cabecera}}
+
+<section class="tarjeta">
+  <div class="tarjeta-header">
+    <h2>Historial de sesiones ({{TOTAL}})</h2>
+    <a href="{{RUTA_SESIONES}}">Actualizar</a>
+  </div>
+
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>#</th><th>Usuario</th><th>Cuenta</th><th>Inicio</th><th>Cierre</th>
+        <th>Saldo inicial</th><th>Saldo final</th><th>Operaciones</th>
+        <th>Retirado</th><th>Depositado</th><th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#SESIONES}}
+      <tr>
+        <td class="mono">{{ID}}</td>
+        <td class="mono"><strong>{{USUARIO}}</strong></td>
+        <td class="mono">{{CUENTA}}</td>
+        <td class="mono">{{INICIO}}</td>
+        <td class="mono">{{CIERRE}}</td>
+        <td class="mono">{{SALDO_INICIAL}}</td>
+        <td class="mono">{{SALDO_FINAL}}</td>
+        <td class="mono">{{OPERACIONES}}</td>
+        <td class="mono negativo">{{RETIRADO}}</td>
+        <td class="mono positivo">{{DEPOSITADO}}</td>
+        <td><span class="etiqueta-tag {{CLASE_ESTADO}}">{{ESTADO}}</span></td>
+      </tr>
+      {{/SESIONES}}
+    </tbody>
+  </table>
+</section>
+
+{{> pie}}

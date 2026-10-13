@@ -1,0 +1,60 @@
+{{> cabecera}}
+
+<section class="rejilla">
+  <div class="mini"><span class="etiqueta">Usuarios</span><strong>{{TOTAL_USUARIOS}}</strong></div>
+  <div class="mini"><span class="etiqueta">Bloqueados</span><strong class="negativo">{{BLOQUEADOS}}</strong></div>
+  <div class="mini"><span class="etiqueta">Cuentas activas</span><strong class="positivo">{{CUENTAS_ACTIVAS}}</strong></div>
+  <div class="mini"><span class="etiqueta">Sesiones abiertas</span><strong>{{SESIONES_ABIERTAS}}</strong></div>
+  <div class="mini"><span class="etiqueta">Saldo en el sistema</span><strong>{{SALDO_TOTAL}}</strong></div>
+</section>
+
+<section class="tarjeta">
+  <div class="tarjeta-header">
+    <h2>Usuarios y cuentas</h2>
+    <a href="{{RUTA_USUARIOS}}">Actualizar</a>
+  </div>
+
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>Usuario</th><th>Nombre</th><th>Rol</th><th>Cuenta</th><th>Saldo</th>
+        <th>Intentos</th><th>Estado</th><th>Ultimo acceso</th><th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#USUARIOS}}
+      <tr>
+        <td class="mono"><strong>{{USUARIO}}</strong></td>
+        <td>{{NOMBRE}}</td>
+        <td>{{ROL}}</td>
+        <td class="mono">
+          {{CUENTA}}
+          {{#SIN_CUENTA}}<span class="nota">(sin asignar)</span>{{/SIN_CUENTA}}
+          {{#CUENTA_INACTIVA}}<span class="etiqueta-tag tag-retiro">Inactiva</span>{{/CUENTA_INACTIVA}}
+        </td>
+        <td class="mono">{{SALDO}}</td>
+        <td class="mono">{{INTENTOS}}</td>
+        <td>
+          {{#BLOQUEADO}}<span class="etiqueta-tag tag-retiro">Bloqueado</span>{{/BLOQUEADO}}
+          {{#ACTIVO}}<span class="etiqueta-tag tag-deposito">Activo</span>{{/ACTIVO}}
+        </td>
+        <td class="mono">{{ULTIMO_ACCESO}}</td>
+        <td>
+          <div class="acciones-celda">
+            {{#ACCIONES}}
+            <form method="post" action="{{RUTA_USUARIOS}}">
+              <input type="hidden" name="id" value="{{ID}}">
+              <input type="hidden" name="accion" value="{{OPERACION}}">
+              <button type="submit" class="{{CLASE}}">{{TEXTO}}</button>
+            </form>
+            {{/ACCIONES}}
+            {{#PROPIO}}<span class="nota">sesion actual</span>{{/PROPIO}}
+          </div>
+        </td>
+      </tr>
+      {{/USUARIOS}}
+    </tbody>
+  </table>
+</section>
+
+{{> pie}}

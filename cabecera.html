@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITULO}} | {{APP_NOMBRE}}</title>
+<link rel="stylesheet" href="{{CSS}}">
+</head>
+<body>
+
+<header class="barra">
+  <div class="marca">
+    <span class="logo">C</span>
+    <div>
+      <strong>{{APP_NOMBRE}}</strong>
+      <small>{{APP_LEMA}}</small>
+    </div>
+  </div>
+
+  {{#USUARIO}}
+  <div class="sesion">
+    <div class="datos">
+      <strong>{{NOMBRE}}</strong>
+      <small>{{ROL}} &middot; {{FECHA}}</small>
+    </div>
+    <form method="post" action="{{RUTA_CERRAR}}">
+      <button type="submit" class="btn btn-outline">Cerrar sesion</button>
+    </form>
+  </div>
+  {{/USUARIO}}
+</header>
+
+<main class="contenido">
+
+  {{#ALERTA}}
+  <div class="alerta alerta-{{TIPO}}">{{TEXTO}}</div>
+  {{/ALERTA}}
+
+  {{#NAV}}
+  <nav class="menu">
+    {{#ENLACES}}<a href="{{URL}}" class="{{CLASE}}">{{TEXTO}}</a>{{/ENLACES}}
+  </nav>
+  {{/NAV}}
+
+<button type="button" class="chat-boton" id="chat-boton" aria-label="Abrir asistente">
+  <span class="chat-icono">?</span>
+  <span class="chat-pista">No sabes como usar el cajero? Te ayudo</span>
+</button>
+
+<div class="chat-panel" id="chat-panel" hidden>
+  <div class="chat-panel-cabecera">
+    <strong>Asistente del cajero</strong>
+    <a href="{{RUTA_CHAT}}" class="chat-abrir">Abrir en pagina completa</a>
+    <button type="button" class="chat-cerrar" id="chat-cerrar">&times;</button>
+  </div>
+
+  <div class="chat-panel-cuerpo" id="chat-panel-cuerpo">
+    {{#CHAT_MENSAJES}}
+    <div class="burbuja {{BURBUJA}}"><p>{{TEXTO}}</p></div>
+    {{/CHAT_MENSAJES}}
+  </div>
+
+  <div class="chat-panel-sugerencias" id="chat-panel-sugerencias">
+    {{#CHAT_SUGERENCIAS}}
+    <button type="button" class="atajo" data-pregunta="{{PREGUNTA}}">{{ETIQUETA}}</button>
+    {{/CHAT_SUGERENCIAS}}
+  </div>
+
+  <form class="chat-panel-form" method="post" action="{{RUTA_CHAT}}" autocomplete="off">
+    <input type="hidden" name="accion" value="preguntar">
+    <input type="text" name="pregunta" required placeholder="Escribe tu pregunta">
+    <button type="submit" class="btn btn-primario">Enviar</button>
+  </form>
+</div>
+
+<script src="{{SCRIPT_CHAT}}"></script>

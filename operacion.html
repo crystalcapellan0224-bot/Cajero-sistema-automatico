@@ -1,0 +1,30 @@
+{{> cabecera}}
+
+<section class="formulario-tarjeta">
+  <a class="volver" href="{{RUTA_CAJERO}}">&larr; Volver al cajero</a>
+
+  <h1>{{TITULO_PAGINA}}</h1>
+  <p class="disponible">{{TEXTO_SALDO}}: <strong>{{SALDO}}</strong></p>
+
+  {{#CUENTA_INACTIVA}}
+  <p class="alerta alerta-error aviso-cuenta">
+    Tu cuenta esta inactiva. El supervisor la restringio, por eso no puedes operar.
+   Puedes consultar tu saldo y tus movimientos, pero no mover dinero.
+  </p>
+  {{/CUENTA_INACTIVA}}
+
+  <form method="post" action="{{ACCION}}">
+    <label for="monto">{{ETIQUETA_MONTO}}</label>
+    <input type="number" id="monto" name="monto" step="0.01" min="1" max="{{MONTO_MAXIMO}}" required autofocus placeholder="0.00">
+
+    <div class="atajos">
+      {{#ATAJOS}}<button type="button" class="atajo" data-monto="{{MONTO}}">${{MONTO}}</button>{{/ATAJOS}}
+    </div>
+
+    <button type="submit" class="btn btn-primario btn-bloque">{{TEXTO_BOTON}}</button>
+  </form>
+</section>
+
+<script src="{{SCRIPT}}"></script>
+
+{{> pie}}

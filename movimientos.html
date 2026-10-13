@@ -1,0 +1,64 @@
+{{> cabecera}}
+
+<section class="tarjeta">
+  <div class="tarjeta-header">
+    <h2>Movimientos de la cuenta {{NUMERO_CUENTA}}</h2>
+    <a href="{{RUTA_CAJERO}}">Volver al cajero</a>
+  </div>
+
+  <div class="mini-rejilla">
+    <div class="mini">
+      <span class="etiqueta">Saldo actual</span>
+      <strong>{{SALDO}}</strong>
+    </div>
+    <div class="mini">
+      <span class="etiqueta">Total retirado</span>
+      <strong class="negativo">{{TOTAL_RETIRADO}}</strong>
+    </div>
+    <div class="mini">
+      <span class="etiqueta">Total depositado</span>
+      <strong class="positivo">{{TOTAL_DEPOSITADO}}</strong>
+    </div>
+    <div class="mini">
+      <span class="etiqueta">Operaciones</span>
+      <strong>{{TOTAL_OPERACIONES}}</strong>
+    </div>
+  </div>
+
+  {{#VACIO}}
+  <p class="vacio">Esta cuenta todavia no tiene movimientos.</p>
+  {{/VACIO}}
+
+  {{#TABLA}}
+  <table class="tabla">
+    <thead>
+      <tr><th>#</th><th>Tipo</th><th>Descripcion</th><th>Cajero</th><th>Monto</th><th>Saldo</th><th>Fecha</th><th></th></tr>
+    </thead>
+    <tbody>
+      {{#FILAS}}
+      <tr>
+        <td class="mono">{{NUMERO}}</td>
+        <td><span class="etiqueta-tag tag-{{TIPO}}">{{TEXTO}}</span></td>
+        <td>
+          {{DESCRIPCION}}
+          {{#COMPROBANTE}}<a class="nota nota-folio" href="{{URL}}">Folio {{FOLIO}}</a>{{/COMPROBANTE}}
+          {{#REFERENCIA}}<span class="nota nota-folio">Ref. {{REFERENCIA}}</span>{{/REFERENCIA}}
+        </td>
+        <td class="mono">{{CAJERO}}</td>
+        <td class="mono {{CLASE_MONTO}}">{{MONTO_CON_SIGNO}}</td>
+        <td class="mono">{{SALDO}}</td>
+        <td class="mono">{{FECHA}}</td>
+        <td>
+          {{#COMPROBANTE}}
+          <a class="btn-mini" href="{{URL}}" target="_blank" rel="noopener">Comprobante</a>
+          {{/COMPROBANTE}}
+        </td>
+      </tr>
+      {{/FILAS}}
+    </tbody>
+  </table>
+  {{/TABLA}}
+
+</section>
+
+{{> pie}}

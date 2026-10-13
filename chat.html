@@ -1,0 +1,37 @@
+{{> cabecera}}
+
+<section class="chat-tarjeta">
+  <div class="tarjeta-header">
+    <h2>Asistente del cajero</h2>
+    <form method="post" action="{{RUTA_CHAT}}">
+      <input type="hidden" name="accion" value="limpiar">
+      <button type="submit" class="btn-mini">Limpiar conversacion</button>
+    </form>
+  </div>
+
+  <div class="chat-caja">
+    {{#MENSAJES}}
+    <div class="{{BURBUJA}}" data-categoria="{{CATEGORIA}}">
+      <p>{{TEXTO}}</p>
+    </div>
+    {{/MENSAJES}}
+  </div>
+
+  {{#SUGERENCIAS}}
+  <div class="chat-sugerencias">
+    {{#BOTONES}}<button type="button" class="atajo" data-pregunta="{{PREGUNTA}}">{{ETIQUETA}}</button>{{/BOTONES}}
+  </div>
+  {{/SUGERENCIAS}}
+
+  <form method="post" action="{{RUTA_CHAT}}" class="chat-form" autocomplete="off">
+    <input type="hidden" name="accion" value="preguntar">
+    <input type="text" name="pregunta" required placeholder="Escribe tu pregunta, por ejemplo: como retiro dinero">
+    <button type="submit" class="btn btn-primario">Enviar</button>
+  </form>
+
+  <p class="nota">El asistente responde solo con la informacion del sistema. Las consultas quedan registradas para el supervisor.</p>
+</section>
+
+<script src="{{SCRIPT_CHAT}}"></script>
+
+{{> pie}}

@@ -1,0 +1,70 @@
+{{> cabecera}}
+
+<section class="comprobante-zona">
+  <div class="comprobante" id="comprobante">
+    <div class="comprobante-cabecera">
+      <div class="comprobante-marca">
+        <span class="logo">C</span>
+        <div>
+          <strong>{{APP_NOMBRE}}</strong>
+          <small>{{APP_LEMA}}</small>
+        </div>
+      </div>
+      <div class="comprobante-tipo">
+        <span class="etiqueta">{{ETIQUETA}}</span>
+        <span class="folio">{{FOLIO}}</span>
+      </div>
+    </div>
+
+    <div class="comprobante-datos">
+      <div><span class="etiqueta">Fecha</span><strong>{{FECHA}}</strong></div>
+      <div><span class="etiqueta">Hora</span><strong>{{HORA}}</strong></div>
+      <div><span class="etiqueta">Cajero / terminal</span><strong>{{CAJERO}}</strong></div>
+      <div><span class="etiqueta">Cliente</span><strong>{{CLIENTE}}</strong></div>
+      <div><span class="etiqueta">Usuario</span><strong>{{LOGIN_CLIENTE}}</strong></div>
+      <div><span class="etiqueta">Cuenta</span><strong>{{CUENTA}}</strong></div>
+    </div>
+
+    <div class="comprobante-totales">
+      <div class="comprobante-monto">
+        <span class="etiqueta">Importe</span>
+        <strong class="importe">{{MONTO}}</strong>
+      </div>
+      <div class="comprobante-saldo">
+        <span class="etiqueta">Saldo final</span>
+        <strong>{{SALDO}}</strong>
+      </div>
+    </div>
+
+    <div class="comprobante-concepto">
+      <span class="etiqueta">Concepto</span>
+      <p>{{DESCRIPCION}}</p>
+    </div>
+
+    {{#HAY_REFERENCIA}}
+    <div class="comprobante-referencia">
+      <span class="etiqueta">Referencia</span>
+      <strong>{{REFERENCIA}}</strong>
+    </div>
+    {{/HAY_REFERENCIA}}
+
+    <p class="comprobante-aviso">
+      Conserva este comprobante. Es el respaldo de la operacion registrada en la base de datos.
+    </p>
+
+    <div class="comprobante-pie">
+      <span>{{APP_NOMBRE}} v{{APP_VERSION}}</span>
+      <span>Folio verificado en sistema</span>
+    </div>
+  </div>
+
+  <div class="acciones">
+    <a href="{{RUTA_MOVIMIENTOS}}" class="btn btn-outline">Ver mis movimientos</a>
+    <a href="{{RUTA_CAJERO}}" class="btn btn-outline">Volver al cajero</a>
+    <button type="button" class="btn btn-primario" id="btn-imprimir">Imprimir comprobante</button>
+  </div>
+</section>
+
+<script src="{{SCRIPT_COMPROBANTE}}"></script>
+
+{{> pie}}

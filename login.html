@@ -1,0 +1,28 @@
+{{> cabecera}}
+
+<section class="login">
+  <div class="login-tarjeta">
+    <h1>Iniciar sesion</h1>
+    <p class="login-lema">Accede con tu usuario para usar el cajero.</p>
+
+    <form method="post" action="{{RUTA_LOGIN}}">
+      <label for="usuario">Usuario</label>
+      <input type="text" id="usuario" name="usuario" required autofocus value="{{USUARIO_VALOR}}">
+
+      <label for="clave">Contrasena</label>
+      <input type="password" id="clave" name="clave" required>
+
+      <button type="submit" class="btn btn-primario btn-bloque">Entrar</button>
+    </form>
+
+    <div class="login-ayuda">
+      <strong>Cuentas de prueba</strong>
+      <span><code>cliente</code> / <code>1234</code> &mdash; saldo $1,000.00</span>
+      <span><code>juan</code> / <code>1234</code> &mdash; saldo $2,500.00</span>
+      <span><code>supervisor</code> / <code>admin123</code></span>
+      <span class="nota">Despues de {{MAX_INTENTOS}} intentos fallidos la cuenta se bloquea.</span>
+    </div>
+  </div>
+</section>
+
+{{> pie}}

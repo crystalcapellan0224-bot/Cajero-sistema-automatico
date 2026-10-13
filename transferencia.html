@@ -1,0 +1,50 @@
+{{> cabecera}}
+
+<section class="formulario-tarjeta">
+  <a class="volver" href="{{RUTA_CAJERO}}">&larr; Volver al cajero</a>
+
+  <h1>Transferir dinero</h1>
+  <p class="disponible">Tu saldo: <strong>{{SALDO}}</strong></p>
+
+  {{#CUENTA_INACTIVA}}
+  <p class="alerta alerta-error aviso-cuenta">
+    Tu cuenta esta inactiva. El supervisor la restringio, por eso no puedes transferir.
+  </p>
+  {{/CUENTA_INACTIVA}}
+
+  <form method="post" action="{{RUTA_TRANSFERENCIA}}" autocomplete="off">
+    <label for="destino">Usuario o numero de cuenta destino</label>
+    <input type="text" id="destino" name="destino" required autofocus
+           value="{{DESTINO_VALOR}}" placeholder="Ejemplo: juan o CR00000002">
+
+    {{#DESTINO_ENCONTRADO}}
+    <div class="destino-preview">
+      <span class="etiqueta">Cuenta encontrada</span>
+      <p><strong>{{NOMBRE}}</strong> <span class="nota">({{USUARIO}})</span></p>
+      <p class="mono">Cuenta {{CUENTA}} &middot; Saldo actual {{SALDO}}</p>
+    </div>
+    {{/DESTINO_ENCONTRADO}}
+
+    {{#DESTINO_INVALIDO}}
+    <p class="alerta alerta-error aviso-campo">No se encontro esa cuenta. Revisa el usuario o el numero.</p>
+    {{/DESTINO_INVALIDO}}
+
+    <label for="monto">Monto a transferir</label>
+    <input type="number" id="monto" name="monto" step="0.01" min="1" max="{{MONTO_MAXIMO}}"
+           required value="{{MONTO_VALOR}}" placeholder="0.00">
+
+    <div class="atajos">
+      {{#ATAJOS}}<button type="button" class="atajo" data-monto="{{MONTO}}">${{MONTO}}</button>{{/ATAJOS}}
+    </div>
+
+    <p class="nota nota-transferencia">
+      El movimiento se guarda en una sola transaccion: si algo falla, no se descuenta nada de tu saldo.
+    </p>
+
+    <button type="submit" class="btn btn-primario btn-bloque">Confirmar transferencia</button>
+  </form>
+</section>
+
+<script src="{{SCRIPT}}"></script>
+
+{{> pie}}

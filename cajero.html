@@ -1,0 +1,109 @@
+{{> cabecera}}
+
+{{#CUENTA_INACTIVA}}
+<section class="alerta alerta-error aviso-cuenta">
+  Tu cuenta esta inactiva. El supervisor la restringio: puedes ver tu saldo y tus movimientos,
+  pero no puedes retirar, depositar ni transferir hasta que la habilite.
+</section>
+
+
+<section class="rejilla">
+
+  <div class="tarjeta tarjeta-saldo">
+    <span class="etiqueta">Saldo disponible</span>
+    <span class="saldo">{{SALDO}}</span>
+    <span class="sub">Cuenta {{NUMERO_CUENTA}}</span>
+  </div>
+
+  <div class="tarjeta">
+    <span class="etiqueta">Esta sesion</span>
+    <ul class="datos-sesion">
+      <li>Inicio <strong>{{SESION_INICIO}}</strong></li>
+      <li>Operaciones <strong>{{SESION_OPERACIONES}}</strong></li>
+      <li>Retirado <strong>{{SESION_RETIRADO}}</strong></li>
+      <li>Depositado <strong>{{SESION_DEPOSITADO}}</strong></li>
+    </ul>
+  </div>
+
+</section>
+
+<section class="operaciones">
+
+  <a class="tarjeta op" href="{{RUTA_RETIRO}}">
+    <span class="op-icono">&#8595;</span>
+    <strong>Retirar dinero</strong>
+    <small>Maximo por operacion</small>
+  </a>
+
+  <a class="tarjeta op" href="{{RUTA_DEPOSITO}}">
+    <span class="op-icono">&#8593;</span>
+    <strong>Depositar dinero</strong>
+    <small>Maximo por operacion</small>
+  </a>
+
+  <a class="tarjeta op" href="{{RUTA_MOVIMIENTOS}}">
+    <span class="op-icono">&#9776;</span>
+    <strong>Movimientos</strong>
+    <small>Historial completo de tu cuenta</small>
+  </a>
+
+
+  <a class="tarjeta op" href="{{RUTA_TRANSFERENCIA}}">
+    <span class="op-icono">&#8646;</span>
+    <strong>Transferir dinero</strong>
+    <small>Envia efectivo a otra cuenta</small>
+  </a>
+
+  <form class="tarjeta op op-form" method="post" action="{{RUTA_CERRAR}}">
+    <span class="op-icono">&#10005;</span>
+    <strong>Cerrar sesion</strong>
+    <small>Guarda el resumen en la base de datos</small>
+    <button type="submit" class="btn btn-peligro btn-bloque">Finalizar</button>
+  </form>
+
+</section>
+
+<section class="tarjeta">
+  <div class="tarjeta-header">
+    <h2>Ultimo comprobante</h2>
+    <a href="{{RUTA_MOVIMIENTOS}}">Ver movimientos</a>
+  </div>
+  <p class="nota">Tu ultima operacion con comprobante fue el folio {{FOLIO_ULTIMO}}.
+     Puedes imprimirlo o descargarlo de nuevo cuando quieras.</p>
+  <div class="acciones">
+    <a class="btn btn-primario" href="{{URL_COMPROBANTE}}">Abrir comprobante</a>
+  </div>
+</section>
+
+<section class="tarjeta">
+  <div class="tarjeta-header">
+    <h2>Ultimos movimientos</h2>
+    <a href="{{RUTA_MOVIMIENTOS}}">Ver todos</a>
+  </div>
+
+  <p class="vacio">Todavia no hay movimientos en esta cuenta.</p>
+
+  <table class="tabla">
+    <thead>
+      <tr><th>Tipo</th><th>Descripcion</th><th>Monto</th><th>Saldo</th><th>Fecha</th></tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td><span class="etiqueta-tag tag-{{TIPO}}">{{TEXTO}}</span></td>
+        <td>
+
+       <a class="nota nota-folio" href="{{URL}}">Folio {{FOLIO}}</a>
+        </td>
+        <td class="mono {{CLASE_MONTO}}">{{MONTO_CON_SIGNO}}</td>
+        <td class="mono">{{SALDO}}</td>
+        <td class="mono">{{FECHA}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+
+</section>
+
+{{> pie}}

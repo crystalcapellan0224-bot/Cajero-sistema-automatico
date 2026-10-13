@@ -1,0 +1,40 @@
+{{> cabecera}}
+
+<section class="instalador">
+  <h1>Instalacion de la base de datos</h1>
+  <p class="login-lema">Crea la base <code>{{DB_NOMBRE}}</code>, sus tablas y las cuentas de prueba.</p>
+
+  {{#ALERTA}}
+  <div class="alerta alerta-{{TIPO}}">{{TEXTO}}</div>
+  {{/ALERTA}}
+
+  {{#ESTADO}}
+  <div class="mini-rejilla">
+    <div class="mini">
+      <span class="etiqueta">Estado</span>
+      <strong class="positivo">{{VALOR}}</strong>
+    </div>
+    <div class="mini">
+      <span class="etiqueta">Tablas</span>
+      <strong>{{DETALLE}}</strong>
+    </div>
+    <div class="mini">
+      <span class="etiqueta">Cuentas</span>
+      <strong>{{EXTRA}}</strong>
+    </div>
+    <div class="mini">
+      <span class="etiqueta">Servidor</span>
+      <strong>{{SERVIDOR}}</strong>
+    </div>
+  </div>
+  {{/ESTADO}}
+
+  <form method="post" action="{{RUTA}}">
+    <button type="submit" class="btn btn-primario btn-bloque">{{TEXTO_BOTON}}</button>
+  </form>
+
+  <p class="nota">El archivo ejecutado es <code>bd/esquema.sql</code>. Las contrasenas de prueba son
+     <code>cliente / 1234</code>, <code>juan / 1234</code> y <code>supervisor / admin123</code>.</p>
+</section>
+
+{{> pie}}
